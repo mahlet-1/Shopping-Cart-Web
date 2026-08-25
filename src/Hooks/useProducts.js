@@ -20,7 +20,7 @@ export function useProducts(category = "") {
         const response = await fetch(fetchUrl, { signal });
         
         if (!response.ok) {
-          throw new Error(`Failed to fetch marketplace products. Status: ${response.status}`);
+          throw new Error(`Failed to fetch products. Status: ${response.status}`);
         }
 
         const data = await response.json();
