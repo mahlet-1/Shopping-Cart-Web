@@ -1,15 +1,20 @@
 import { useState } from "react";
-import { useNotification } from "../Context/NotificationContext";
-import { useLocalStorage } from "../Hooks/useLocalStorage";
 import { useProducts } from "../Hooks/useProducts";
+import { useProductActions } from "../Hooks/useProductActions";
 
 export function Home() {
-  const { addNotification } = useNotification();
-  const [wishlist, setWishlist] = useLocalStorage("wishlist", []); 
-  const [recentlyviewed, setRecentlyviewed] = useLocalStorage("recentlyViewed", []); 
-  const { products, isLoading, error } = useProducts();
-  const [selectedCategory, setSelectedCategory] = useState("All"); 
-  const categories = ["All", "electronics", "jewelery", "men's clothing", "women's clothing"];
+  const { 
+    products, 
+    isLoading, 
+    error, 
+    recentlyviewed, 
+    selectedCategory, 
+    setSelectedCategory, 
+    categories, 
+    addNotification, 
+    handleAddToWishlist, 
+    handleProductClick
+  } = useProductActions();
 
   if (isLoading) return <div className="loading-state">Loading items...</div>;
   if (error) return <div className="error-state">Failed to load products.</div>;
@@ -17,22 +22,6 @@ export function Home() {
   const filteredProducts = selectedCategory === "All" 
     ? products.slice(0, 8) 
     : products.filter(product => product.category === selectedCategory);
-
-  const handleAddToWishlist = (product) => {
-    const exists = wishlist.some(item => item.id === product.id);
-    if (!exists) {
-      setWishlist([...wishlist, product]);
-      addNotification(`Added ${product.title} to your wishlist!`);
-    } else {
-      addNotification(`${product.title} is already in your wishlist!`);
-    }
-  };
-
-  const handleProductClick = (product) => {
-    const filtered = recentlyviewed.filter(item => item.id !== product.id);
-    const updated = [product, ...filtered].slice(0, 4);
-    setRecentlyviewed(updated);
-  };
 
   return (
     <div className="home-container">
