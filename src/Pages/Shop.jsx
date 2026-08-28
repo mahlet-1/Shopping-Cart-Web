@@ -2,6 +2,9 @@ import { useState, useMemo } from "react";
 import { useProducts } from "../Hooks/useProducts";
 import { useProductActions } from "../Hooks/useProductActions";
 import SearchBar from "../shop/SearchBar";
+import CategoryFilter from "../shop/CategoryFilter";
+import ProductGrid from "../product/ProductGrid";
+import SkeletonCard from "../product/SkeletonCard";
 
 export function Shop() {
   const { 
@@ -17,7 +20,18 @@ export function Shop() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("default");
   
-  if (isLoading) return <div className="loading-state">Loading store catalog...</div>;
+  if (isLoading) {
+    return (
+      <div className="shop-container">
+        <div className="product-grid">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (error) return <div className="error-state">Failed to load shop products.</div>;
 
   const filteredAndSortedProducts = useMemo(() => {
@@ -52,13 +66,11 @@ export function Shop() {
       </header>
 
       <div className="shop-controls">
-        <input 
-          type="text" 
-          placeholder="Search products..." 
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
+        <SearchBar
+        searchTerm={searchQuery} 
+        onSearchChange={setSearchQuery} 
         />
+
 
         <select 
           value={sortBy} 
@@ -72,38 +84,19 @@ export function Shop() {
         </select>
       </div>
 
-      <div className="category-filters">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={selectedCategory === category ? "active" : ""}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+      <CategoryFilter 
+      categories={categories} 
+      selectedCategory={selectedCategory} 
+      onSelectCategory={setSelectedCategory} 
+      />
 
       <div className="product-grid">
         {filteredAndSortedProducts.length > 0 ? (
-          filteredAndSortedProducts.map((product) => (
-            <div 
-              key={product.id} 
-              className="product-card"
-              onClick={() => handleProductClick(product)}
-            >
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>${product.price.toFixed(2)}</p>
-              <button onClick={(e) => {
-                e.stopPropagation(); // Prevents card click conflict!
-                handleAddToWishlist(product);
-                handleProductClick(product);
-              }}>
-                Add to Wishlist
-              </button>
-            </div>
-          ))
+          <ProductGrid 
+            products={filteredAndSortedProducts} 
+            onProductClick={handleProductClick}
+            onAddToWishlist={handleAddToWishlist}
+          />
         ) : (
           <p className="no-results">No products found matching your search.</p>
         )}

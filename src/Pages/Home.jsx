@@ -8,9 +8,6 @@ export function Home() {
     isLoading, 
     error, 
     recentlyviewed, 
-    selectedCategory, 
-    setSelectedCategory, 
-    categories, 
     addNotification, 
     handleAddToWishlist, 
     handleProductClick
@@ -40,7 +37,7 @@ export function Home() {
               <img src={product.image} alt={product.title} />
               <h3>{product.title}</h3>
               <p>${product.price.toFixed(2)}</p>
-              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); handleProductClick(product); }}>
+              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); }}>
                 Add to Wishlist
               </button>
             </div>
@@ -56,7 +53,7 @@ export function Home() {
               <img src={product.image} alt={product.title} />
               <h3>{product.title}</h3>
               <p>${product.price.toFixed(2)}</p>
-              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); handleProductClick(product); }}>
+              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); }}>
                 Add to Wishlist
               </button>
             </div>
