@@ -6,6 +6,10 @@ import CategoryFilter from "../Components/shop/CategoryFilter";
 import ProductGrid from "../Components/product/ProductGrid";
 import SkeletonCard from "../Components/product/SkeletonCard";
 
+const getCategoryCount = (categoryName, allProducts) => {
+  return allProducts.filter((p) => p.category === categoryName).length;
+};
+
 export function Shop() {
   const { 
     products, 
@@ -39,6 +43,8 @@ export function Shop() {
       result = [...result].sort((a, b) => b.price - a.price);
     } else if (sortBy === "title-az") {
       result = [...result].sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === "rating") {
+      result = [...result].sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0));
     }
 
     return result;
@@ -56,7 +62,16 @@ export function Shop() {
     );
   }
 
-  if (error) return <div className="error-state">Failed to load shop products.</div>;
+  if (error) {
+    return (
+      <div className="error-state">
+        <p>Failed to load shop products.</p>
+        <button onClick={() => window.location.reload()} className="retry-btn">
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="shop-container">
@@ -81,14 +96,18 @@ export function Shop() {
           <option value="price-low">Price: Low to High</option>
           <option value="price-high">Price: High to Low</option>
           <option value="title-az">Name: A to Z</option>
+          <option value="rating">Rating (High to Low)</option>
         </select>
       </div>
 
       <CategoryFilter 
-      categories={categories} 
-      selectedCategory={selectedCategory} 
-      onSelectCategory={setSelectedCategory} 
-      />
+      categories={categories.map(category => ({
+      name: category,
+      count: category === "All" ? products.length : getCategoryCount(category, products)
+       }))} 
+       selectedCategory={selectedCategory} 
+       onSelectCategory={setSelectedCategory} 
+       />
 
       <div className="product-grid">
         {filteredAndSortedProducts.length > 0 ? (

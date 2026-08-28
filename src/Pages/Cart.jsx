@@ -20,13 +20,13 @@ export function Cart() {
   };
 
   const handleRemoveItem = (id, title) => {
-    dispatch({ type: "REMOVING", payload: id });
+    dispatch({ type: "REMOVE_ITEM", payload: id });
     addNotification(`Removed ${title} from your cart.`);
   };
 
   const handleClearCart = () => {
     if (window.confirm("Are you sure you want to clear your entire cart?")) {
-      dispatch({ type: "CLEAR" });
+      dispatch({ type: "CLEAR_CART" });
       addNotification("Cleared all items from your cart.");
     }
   };

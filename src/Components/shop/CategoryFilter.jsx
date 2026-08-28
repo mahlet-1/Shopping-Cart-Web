@@ -1,19 +1,13 @@
 export default function CategoryFilter({ categories, selectedCategory, onSelectCategory }) {
   return (
     <div className="category-filter-container">
-      <button
-        className={`category-btn ${selectedCategory === "All" ? "active" : ""}`}
-        onClick={() => onSelectCategory("All")}
-      >
-        All
-      </button>
       {categories.map((category) => (
         <button
-          key={category}
-          className={`category-btn ${selectedCategory === category ? "active" : ""}`}
-          onClick={() => onSelectCategory(category)}
+          key={category.name}
+          className={`category-btn ${selectedCategory === category.name ? "active" : ""}`}
+          onClick={() => onSelectCategory(category.name)}
         >
-          {category}
+           {category.name} ({category.count})
         </button>
       ))}
     </div>

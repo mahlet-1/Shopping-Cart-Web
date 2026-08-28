@@ -32,7 +32,7 @@ export function ProductDetail() {
    const handleAddToCart = () => {
     if (!product) return;
     dispatch({ 
-        type: "ADDING", 
+        type: "ADD_ITEM", 
         payload: { ...product, quantity } 
     });
     addNotification(`Added ${quantity} ${product.title} to your cart.`);

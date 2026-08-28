@@ -3,6 +3,7 @@ import { CartProvider } from "./Context/CartContext";
 import { NotificationProvider } from "./Context/NotificationContext";
 import NavBar from "./Components/layout/NavBar";
 import Footer from "./Components/layout/Footer";
+import NotificationToast from "./Components/product/NotificationToast";
 import { Home } from "./Pages/Home";
 import { Shop } from "./Pages/Shop";
 import { ProductDetail } from "./Pages/ProductDetail";
@@ -14,6 +15,7 @@ export default function App() {
     <CartProvider>
       <NotificationProvider>
         <BrowserRouter>
+        <NotificationToast />
           <div className="app-layout">
             <NavBar />
             <main className="main-content">

@@ -2,7 +2,7 @@ export const initialState = {cart:[]};
 
 export function cartReducer(state, action) {
   switch (action.type) {
-    case 'ADDING': {
+    case 'ADD_ITEM': {
       const existingItem = state.cart.findIndex(item => item.id === action.payload.id);
       if (existingItem> -1) {
         const updatedCart = [...state.cart];
@@ -15,7 +15,7 @@ export function cartReducer(state, action) {
       return { ...state, cart: [...state.cart, { ...action.payload, quantity: 1 }] };
     }
 
-    case 'REMOVING':
+    case 'REMOVE_ITEM':
       return {...state,
         cart: state.cart.filter(item => item.id !== action.payload),
       };
@@ -34,7 +34,7 @@ export function cartReducer(state, action) {
       };
     }
 
-    case 'CLEAR':
+    case 'CLEAR_CART':
       return { ...state, cart: [] };
 
     default:
