@@ -1,5 +1,7 @@
 import { useCart } from "../Hooks/useCart";
 import { useNotification } from "../Context/NotificationContext";
+import CartItem from "../Components/cart/CartItem";
+import OrderSummary from "../Components/cart/OrderSummary";
 
 export function Cart() {
   const { cart, dispatch } = useCart();
@@ -7,7 +9,7 @@ export function Cart() {
 
   const handleQuantityChange = (id, delta) => {
     const item = cart.find(i => i.id === id);
-    const currentQty = item.quantity || 1;
+    const currentQty = item?.quantity || 1;
     const newQty = currentQty + delta;
 
     dispatch({
@@ -53,59 +55,21 @@ export function Cart() {
       <div className="cart-content">
         <div className="cart-items">
           {cart.map((item) => (
-            <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.title} />
-              
-              <div className="cart-item-details">
-                <h3>{item.title}</h3>
-                <p className="cart-item-price">${item.price.toFixed(2)}</p>
-              </div>
-
-              <div className="cart-item-quantity">
-                <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
-                <span>{item.quantity || 1}</span>
-                <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
-              </div>
-
-              <button 
-                className="remove-item-btn" 
-                onClick={() => handleRemoveItem(item.id, item.title)}
-              >
-                Remove
-              </button>
-            </div>
+            <CartItem 
+              key={item.id} 
+              item={item} 
+              onQuantityChange={handleQuantityChange} 
+              onRemove={handleRemoveItem} 
+            />
           ))}
         </div>
-        <div className="cart-summary">
-          <h2>Order Summary</h2>
-          <div className="summary-row">
-            <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
-          </div>
-
-          <div className="summary-row">
-            <span>Shipping</span>
-            <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
-          </div>
-
-          <div className="summary-row">
-            <span>Estimated Tax (15%)</span>
-            <span>${tax.toFixed(2)}</span>
-          </div>
-
-          <hr />
-
-          <div className="summary-row total">
-            <span>Total</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-          <button 
-            className="checkout-btn" 
-            onClick={() => addNotification("You are checked out!")}
-          >
-            Proceed to Checkout
-          </button>
-        </div>
+        <OrderSummary 
+        subtotal={subtotal}
+        shipping={shipping}
+        tax={tax}
+        total={total}
+        onCheckout={() => addNotification("You are checking out!")}
+        />
       </div>
     </div>
   );

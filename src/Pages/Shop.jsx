@@ -1,10 +1,10 @@
 import { useState, useMemo } from "react";
 import { useProducts } from "../Hooks/useProducts";
 import { useProductActions } from "../Hooks/useProductActions";
-import SearchBar from "../shop/SearchBar";
-import CategoryFilter from "../shop/CategoryFilter";
-import ProductGrid from "../product/ProductGrid";
-import SkeletonCard from "../product/SkeletonCard";
+import SearchBar from "../Components/shop/SearchBar";
+import CategoryFilter from "../Components/shop/CategoryFilter";
+import ProductGrid from "../Components/product/ProductGrid";
+import SkeletonCard from "../Components/product/SkeletonCard";
 
 export function Shop() {
   const { 
