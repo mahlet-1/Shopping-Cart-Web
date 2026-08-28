@@ -19,9 +19,8 @@ export function Home() {
   if (isLoading) return <div className="loading-state">Loading items...</div>;
   if (error) return <div className="error-state">Failed to load products.</div>;
 
-  const filteredProducts = selectedCategory === "All" 
-    ? products.slice(0, 8) 
-    : products.filter(product => product.category === selectedCategory);
+  const latestArrivals = products.slice(-8); 
+  const featuredProducts = products.slice(0, 4); 
 
   return (
     <div className="home-container">
@@ -33,37 +32,37 @@ export function Home() {
         </button>
       </section>
 
-      <div className="category-filters">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={selectedCategory === category ? "active" : ""}
-            onClick={() => setSelectedCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      <div className="product-grid">
-        {filteredProducts.map((product) => (
-          <div 
-            key={product.id} 
-            className="product-card"
-            onClick={() => handleProductClick(product)}
-          >
-            <img src={product.image} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>${product.price.toFixed(2)}</p>
-            <button onClick={(e) => {
-              handleAddToWishlist(product);
-              handleProductClick(product);
-            }}>
-              Add to Wishlist
-            </button>
-          </div>
-        ))}
-      </div>
+      <section className="home-section">
+        <h2>Latest Arrivals</h2>
+        <div className="product-grid">
+          {latestArrivals.map((product) => (
+            <div key={`latest-${product.id}`} className="product-card" onClick={() => handleProductClick(product)}>
+              <img src={product.image} alt={product.title} />
+              <h3>{product.title}</h3>
+              <p>${product.price.toFixed(2)}</p>
+              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); handleProductClick(product); }}>
+                Add to Wishlist
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+      
+      <section className="home-section">
+        <h2>Products you might like</h2>
+        <div className="product-grid">
+          {featuredProducts.map((product) => (
+            <div key={`featured-${product.id}`} className="product-card" onClick={() => handleProductClick(product)}>
+              <img src={product.image} alt={product.title} />
+              <h3>{product.title}</h3>
+              <p>${product.price.toFixed(2)}</p>
+              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); handleProductClick(product); }}>
+                Add to Wishlist
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {recentlyviewed.length > 0 && (
         <section className="recently-viewed-section" >
