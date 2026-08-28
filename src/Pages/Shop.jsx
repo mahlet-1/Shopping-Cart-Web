@@ -93,9 +93,9 @@ export function Shop() {
       <div className="product-grid">
         {filteredAndSortedProducts.length > 0 ? (
           <ProductGrid 
-            products={filteredAndSortedProducts} 
-            onProductClick={handleProductClick}
-            onAddToWishlist={handleAddToWishlist}
+          products={filteredAndSortedProducts} 
+          onView={handleProductClick}
+          onWishlist={handleAddToWishlist}
           />
         ) : (
           <p className="no-results">No products found matching your search.</p>
