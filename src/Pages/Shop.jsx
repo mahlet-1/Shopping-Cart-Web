@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useProducts } from "../Hooks/useProducts";
 import { useProductActions } from "../Hooks/useProductActions";
+import SearchBar from "../shop/SearchBar";
 
 export function Shop() {
   const { 
