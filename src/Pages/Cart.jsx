@@ -1,14 +1,15 @@
 import { useCart } from "../Hooks/useCart";
-import { useNotification } from "../Context/NotificationContext";
+import { useNotification } from "../Hooks/useNotification";
 import CartItem from "../Components/cart/CartItem";
 import OrderSummary from "../Components/cart/OrderSummary";
 
 export function Cart() {
   const { cart, dispatch } = useCart();
   const { addNotification } = useNotification();
+  const cartItems = Array.isArray(cart) ? cart : (cart?.items || []);
 
   const handleQuantityChange = (id, delta) => {
-    const item = cart.find(i => i.id === id);
+    const item = cartItems.find(i => i.id === id);
     const currentQty = item?.quantity || 1;
     const newQty = currentQty + delta;
 
@@ -30,12 +31,13 @@ export function Cart() {
     }
   };
 
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+   
+  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
   const shipping = subtotal === 0 ? 0 : (subtotal > 50 ? 0 : 5.00);
   const tax = subtotal * 0.15;
   const total = subtotal + shipping + tax;
 
-  if (cart.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="empty-cart">
         <h2>Your Shopping Cart is Empty</h2>
@@ -54,7 +56,7 @@ export function Cart() {
 
       <div className="cart-content">
         <div className="cart-items">
-          {cart.map((item) => (
+          {cartItems.map((item) => (
             <CartItem 
               key={item.id} 
               item={item} 

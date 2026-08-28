@@ -2,9 +2,10 @@ import { NavLink } from "react-router-dom";
 import { useCart } from "../../Hooks/useCart";
 
 
-export default function Navbar() {
+export default function NavBar() {
   const { cart } = useCart();
-  const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const cartItems = Array.isArray(cart) ? cart : (cart?.items || []);
+  const totalItems = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
 
   return (
     <nav className="navbar">

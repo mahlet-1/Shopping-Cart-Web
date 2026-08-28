@@ -19,23 +19,9 @@ export function Shop() {
   } = useProductActions();
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("default");
-  
-  if (isLoading) {
-    return (
-      <div className="shop-container">
-        <div className="product-grid">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
-      </div>
-    );
-  }
 
-  if (error) return <div className="error-state">Failed to load shop products.</div>;
-
-  const filteredAndSortedProducts = useMemo(() => {
-    let result = products;
+ const filteredAndSortedProducts = useMemo(() => {
+    let result = products || [];
 
     if (selectedCategory !== "All") {
       result = result.filter(product => product.category === selectedCategory);
@@ -57,6 +43,20 @@ export function Shop() {
 
     return result;
   }, [products, selectedCategory, searchQuery, sortBy]);
+
+  if (isLoading) {
+    return (
+      <div className="shop-container">
+        <div className="product-grid">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) return <div className="error-state">Failed to load shop products.</div>;
 
   return (
     <div className="shop-container">

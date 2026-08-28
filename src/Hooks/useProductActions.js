@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
-import { useNotification } from "../Context/NotificationContext";
+import { useNotification } from "./useNotification";
 import { useProducts } from "./useProducts";
 
 export function useProductActions() {

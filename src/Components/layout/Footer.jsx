@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-brand">
-          <h2>ShopFac </h2>
+          <h2>ShopFav </h2>
           <p>Your perfect destination for favorite finds.</p>
         </div>
 

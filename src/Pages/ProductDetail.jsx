@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../Hooks/useCart";
-import { useNotification } from "../Context/NotificationContext";
+import { useNotification } from "../Hooks/useNotification";
 
 export function ProductDetail() {
   const { id } = useParams();
