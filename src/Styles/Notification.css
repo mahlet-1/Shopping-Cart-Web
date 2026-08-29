@@ -39,18 +39,22 @@
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .notification-container {
     top: 16px;
     left: 16px;
     right: 16px;
     transform: none;
     width: calc(100% - 32px);
+    box-sizing: border-box;
   }
   
   .notification-toast {
     min-width: 100%;
     max-width: 100%;
-    border-radius: 12px; 
+    width: 100%;
+    border-radius: 12px;
+    box-sizing: border-box;
   }
 }
+ 
