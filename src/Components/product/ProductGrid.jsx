@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-export default function ProductGrid({ products, onWishlist }) {
+export default function ProductGrid({ products, onWishlist, onView }) {
   if (!products || products.length === 0) {
     return <p className="no-products">No products found.</p>;
   }
@@ -8,7 +8,11 @@ export default function ProductGrid({ products, onWishlist }) {
   return (
     <div className="product-grid">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product}  onWishlist={onWishlist} />
+        <ProductCard 
+        key={product.id} 
+        product={product}  
+        onWishlist={onWishlist}
+        onView={onView} />
       ))}
     </div>
   );
