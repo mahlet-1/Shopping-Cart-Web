@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useProducts } from "../Hooks/useProducts";
 import { useProductActions } from "../Hooks/useProductActions";
+import ProductGrid from "../Components/product/ProductGrid";
+import { Link } from "react-router-dom";
 import "../Styles/HeroSection.css";
+import "../Styles/Home.css";
 
 export function Home() {
   const { 
@@ -25,61 +28,41 @@ export function Home() {
       <section className="hero-banner">
         <h1>Discover what you need.</h1>
         <p>Explore materials you need to elevate your space, style, and routine.</p>
-        <button 
-          className="hero-banner-btn" 
-          onClick={() => addNotification("Welcome! Explore our latest arrivals.")}>
-            Explore Catalog
-        </button>
+        <Link 
+        to="/shop" 
+        className="hero-banner-btn"
+        style={{ textDecoration: 'none', display: 'inline-block' }}
+        >
+          Explore our shop
+          </Link>
       </section>
 
       <section className="home-section">
         <h2>Latest Arrivals</h2>
-        <div className="product-grid">
-          {latestArrivals.map((product) => (
-            <div key={`latest-${product.id}`} className="product-card" onClick={() => handleProductClick(product)}>
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>${product.price.toFixed(2)}</p>
-              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); }}>
-                Add to Wishlist
-              </button>
-            </div>
-          ))}
-        </div>
+        <ProductGrid 
+          products={latestArrivals} 
+          onWishlist={handleAddToWishlist} 
+          onView={handleProductClick} 
+        />
       </section>
       
       <section className="home-section">
         <h2>Products you might like</h2>
-        <div className="product-grid">
-          {featuredProducts.map((product) => (
-            <div key={`featured-${product.id}`} className="product-card" onClick={() => handleProductClick(product)}>
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <p>${product.price.toFixed(2)}</p>
-              <button onClick={(e) => { e.stopPropagation(); handleAddToWishlist(product); }}>
-                Add to Wishlist
-              </button>
-            </div>
-          ))}
-        </div>
+        <ProductGrid 
+          products={featuredProducts} 
+          onWishlist={handleAddToWishlist} 
+          onView={handleProductClick} 
+        />
       </section>
 
       {recentlyviewed.length > 0 && (
         <section className="recently-viewed-section" >
           <h2>Recently Viewed</h2>
-          <div className="product-grid">
-            {recentlyviewed.map((product) => (
-              <div 
-                key={`recent-${product.id}`} 
-                className="product-card"
-                onClick={() => handleProductClick(product)}
-              >
-                <img src={product.image} alt={product.title} />
-                <h4>{product.title}</h4>
-                <p>${product.price.toFixed(2)}</p>
-              </div>
-            ))}
-          </div>
+          <ProductGrid 
+            products={recentlyviewed} 
+            onView={handleProductClick} 
+            onWishlist={handleAddToWishlist} 
+          />
         </section>
       )}
     </div>

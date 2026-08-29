@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onWishlist }) {
   const navigate = useNavigate();
 
   return (
@@ -17,6 +17,17 @@ export default function ProductCard({ product }) {
         >
           View Details
         </button>
+        {onWishlist && (
+            <button 
+              className="wishlist-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                onWishlist(product);
+              }}
+            >
+              Add to wishlist
+            </button>
+        )}
       </div>
     </div>
   );
