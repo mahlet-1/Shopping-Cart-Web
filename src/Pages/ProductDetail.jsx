@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../Hooks/useCart";
 import { useNotification } from "../Hooks/useNotification";
 import RelatedProducts from "../Components/product/RelatedProducts"; 
+import { useProductActions } from "../Hooks/useProductActions";
 import "../Styles/ProductDetail.css"; 
 
 export function ProductDetail() {
@@ -10,7 +11,7 @@ export function ProductDetail() {
   const navigate = useNavigate();
   const { dispatch } = useCart();
   const { addNotification } = useNotification();
-
+  const { handleProductClick } = useProductActions();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
@@ -22,6 +23,10 @@ export function ProductDetail() {
         const data = await response.json();
         setProduct(data);
         setLoading(false);
+        if (data) {
+          handleProductClick(data);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       } catch (err) {
         console.error("Error fetching product details:", err);
         setLoading(false);
