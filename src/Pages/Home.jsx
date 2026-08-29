@@ -16,9 +16,6 @@ export function Home() {
     handleProductClick
   } = useProductActions();
 
-  if (isLoading) return <div className="loading-state">Loading items...</div>;
-  if (error) return <div className="error-state">Failed to load products.</div>;
-
   const latestArrivals = products.slice(-8); 
   const featuredProducts = products.slice(0, 4); 
 
@@ -34,6 +31,13 @@ export function Home() {
           Explore our shop
           </Link>
       </section>
+
+      {isLoading ? (
+        <div className="loading-state">Loading items...</div>
+      ) : error ? (
+        <div className="error-state">Failed to load products.</div>
+      ) : (
+        <>
 
       <section className="home-section">
         <h2>Latest Arrivals</h2>
@@ -59,6 +63,8 @@ export function Home() {
             onView={handleProductClick} 
           />
         </section>
+      )}
+    </>
       )}
     </div>
   );
