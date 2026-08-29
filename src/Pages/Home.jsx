@@ -13,7 +13,6 @@ export function Home() {
     error, 
     recentlyviewed, 
     addNotification, 
-    handleAddToWishlist, 
     handleProductClick
   } = useProductActions();
 
@@ -31,7 +30,6 @@ export function Home() {
         <Link 
         to="/shop" 
         className="hero-banner-btn"
-        style={{ textDecoration: 'none', display: 'inline-block' }}
         >
           Explore our shop
           </Link>
@@ -41,7 +39,6 @@ export function Home() {
         <h2>Latest Arrivals</h2>
         <ProductGrid 
           products={latestArrivals} 
-          onWishlist={handleAddToWishlist} 
           onView={handleProductClick} 
         />
       </section>
@@ -50,7 +47,6 @@ export function Home() {
         <h2>Products you might like</h2>
         <ProductGrid 
           products={featuredProducts} 
-          onWishlist={handleAddToWishlist} 
           onView={handleProductClick} 
         />
       </section>
@@ -61,7 +57,6 @@ export function Home() {
           <ProductGrid 
             products={recentlyviewed} 
             onView={handleProductClick} 
-            onWishlist={handleAddToWishlist} 
           />
         </section>
       )}

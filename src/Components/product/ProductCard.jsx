@@ -17,17 +17,6 @@ export default function ProductCard({ product, onWishlist }) {
         >
           View Details
         </button>
-        {onWishlist && (
-            <button 
-              className="wishlist-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                onWishlist(product);
-              }}
-            >
-              Add to wishlist
-            </button>
-        )}
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ export function Shop() {
     selectedCategory, 
     setSelectedCategory, 
     categories, 
-    handleAddToWishlist, 
     handleProductClick 
   } = useProductActions();
   const [searchQuery, setSearchQuery] = useState("");
@@ -113,7 +112,6 @@ export function Shop() {
         <ProductGrid 
         products={filteredAndSortedProducts} 
         onView={handleProductClick}
-        onWishlist={handleAddToWishlist}
         />
       ) : (
       <p className="no-results">No products found matching your search.</p>

@@ -88,12 +88,6 @@ export function ProductDetail() {
             <button className="add-to-cart-btn" onClick={handleAddToCart}>
               Add to Cart
             </button>
-            <button 
-              className="wishlist-btn" 
-              onClick={() => handleAddToWishlist(product)}
-            >
-              Add to Wishlist
-            </button>
           </div>
         </div>
       </div>
