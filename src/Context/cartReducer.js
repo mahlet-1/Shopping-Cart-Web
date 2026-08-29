@@ -3,16 +3,22 @@ export const initialState = {cart:[]};
 export function cartReducer(state, action) {
   switch (action.type) {
     case 'ADD_ITEM': {
-      const existingItem = state.cart.findIndex(item => item.id === action.payload.id);
-      if (existingItem> -1) {
+      const itemIndex = state.cart.findIndex(item => item.id === action.payload.id);
+      const addQuantity = action.payload.quantity || 1;
+
+      if (itemIndex > -1) {
         const updatedCart = [...state.cart];
-        updatedCart[existingItem] = {
-            ...updatedCart[existingItem],quantity: updatedCart[existingItem].quantity + 1,
+        updatedCart[itemIndex] = {
+          ...updatedCart[itemIndex],
+          quantity: updatedCart[itemIndex].quantity + addQuantity,
         };
         return { ...state, cart: updatedCart };
       }
       
-      return { ...state, cart: [...state.cart, { ...action.payload, quantity: 1 }] };
+      return { 
+        ...state, 
+        cart: [...state.cart, { ...action.payload, quantity: addQuantity }] 
+      };
     }
 
     case 'REMOVE_ITEM':

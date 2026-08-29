@@ -2,6 +2,7 @@ import { useCart } from "../Hooks/useCart";
 import { useNotification } from "../Hooks/useNotification";
 import CartItem from "../Components/cart/CartItem";
 import OrderSummary from "../Components/cart/OrderSummary";
+import "../Styles/Cart.css";
 
 export function Cart() {
   const { cart, dispatch } = useCart();
