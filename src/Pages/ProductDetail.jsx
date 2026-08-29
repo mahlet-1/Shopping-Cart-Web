@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../Hooks/useCart";
 import { useNotification } from "../Hooks/useNotification";
+import RelatedProducts from "../Components/product/RelatedProducts"; 
+import "../Styles/ProductDetail.css"; 
 
 export function ProductDetail() {
   const { id } = useParams();
@@ -89,6 +91,7 @@ export function ProductDetail() {
           </div>
         </div>
       </div>
+      <RelatedProducts productId={product.id} category={product.category} />
     </div>
   );
 }

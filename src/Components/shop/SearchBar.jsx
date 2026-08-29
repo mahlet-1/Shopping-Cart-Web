@@ -13,7 +13,7 @@ export default function SearchBar({ searchTerm, onSearchChange}) {
           className="clear-search-btn" 
           onClick={() => onSearchChange("")}
         >
-          clear
+          x
         </button>
       )}
     </div>

@@ -5,6 +5,7 @@ import SearchBar from "../Components/shop/SearchBar";
 import CategoryFilter from "../Components/shop/CategoryFilter";
 import ProductGrid from "../Components/product/ProductGrid";
 import SkeletonCard from "../Components/product/SkeletonCard";
+import "../Styles/ShopPage.css";
 
 const getCategoryCount = (categoryName, allProducts) => {
   return allProducts.filter((p) => p.category === categoryName).length;
@@ -108,18 +109,15 @@ export function Shop() {
        selectedCategory={selectedCategory} 
        onSelectCategory={setSelectedCategory} 
        />
-
-      <div className="product-grid">
-        {filteredAndSortedProducts.length > 0 ? (
-          <ProductGrid 
-          products={filteredAndSortedProducts} 
-          onView={handleProductClick}
-          onWishlist={handleAddToWishlist}
-          />
-        ) : (
-          <p className="no-results">No products found matching your search.</p>
-        )}
-      </div>
+       {filteredAndSortedProducts.length > 0 ? (
+        <ProductGrid 
+        products={filteredAndSortedProducts} 
+        onView={handleProductClick}
+        onWishlist={handleAddToWishlist}
+        />
+      ) : (
+      <p className="no-results">No products found matching your search.</p>
+      )}
     </div>
   );
 }
