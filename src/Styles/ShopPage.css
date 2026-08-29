@@ -158,6 +158,44 @@
   border-radius: 16px;
 }
 
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh; 
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.error-state p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #dc2626; 
+  margin-bottom: 36px;
+}
+
+.retry-btn {
+  align-items: center;
+  justify-content: center;
+  background-color: #483307;
+  color: #ffffff;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.retry-btn:hover {
+  background-color: #7b6011;
+  border-color: #7b6011;
+}
+
 @media (max-width: 768px) {
   .shop-controls {
     grid-template-columns: 1fr;

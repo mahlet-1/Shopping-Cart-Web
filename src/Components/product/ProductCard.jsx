@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function ProductCard({ product, onWishlist, onView }) {
+export default function ProductCard({ product, onView }) {
   const navigate = useNavigate();
   const handleClick = () => {
     if (onView) onView(product);
