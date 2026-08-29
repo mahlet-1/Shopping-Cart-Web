@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useCart } from "../../Hooks/useCart";
+import '../../Styles/Layout.css';
 
 
 export default function NavBar() {
