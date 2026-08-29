@@ -1,8 +1,13 @@
 import { createContext, useState } from "react";
+import "../Styles/Notification.css"; 
 
 export const NotificationContext = createContext();
 export function NotificationProvider({ children }) {
   const [notifications, setNotifications] = useState([]);
+
+  const removeNotification = (id) => {
+    setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+  };
 
   const addNotification = (message) => {
     const id = Date.now(); 
@@ -11,10 +16,6 @@ export function NotificationProvider({ children }) {
     setTimeout(() => {
       removeNotification(id);
     }, 3000);
-  };
-
-  const removeNotification = (id) => {
-    setNotifications((prev) => prev.filter((notification) => notification.id !== id));
   };
 
   return (
