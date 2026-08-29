@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useProducts } from "../Hooks/useProducts";
 import { useProductActions } from "../Hooks/useProductActions";
+import "../Styles/HeroSection.css";
 
 export function Home() {
   const { 
@@ -24,8 +25,10 @@ export function Home() {
       <section className="hero-banner">
         <h1>Discover what you need.</h1>
         <p>Explore materials you need to elevate your space, style, and routine.</p>
-        <button onClick={() => addNotification("Welcome! Explore our latest arrivals.")}>
-          Explore Catalog
+        <button 
+          className="hero-banner-btn" 
+          onClick={() => addNotification("Welcome! Explore our latest arrivals.")}>
+            Explore Catalog
         </button>
       </section>
 
