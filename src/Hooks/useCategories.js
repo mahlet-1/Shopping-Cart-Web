@@ -21,7 +21,7 @@ export function useCategories() {
         }
 
         const data = await response.json();
-        setCategories(data);
+        setCategories(["All", ...data]);
       } catch (err) {
         if (err.name !== "AbortError") {
           setError(err.message || "An unexpected error occurred while loading categories.");

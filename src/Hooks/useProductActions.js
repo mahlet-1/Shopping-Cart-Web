@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 import { useNotification } from "./useNotification";
 import { useProducts } from "./useProducts";
+import { useCategories } from "./useCategories";
 
 export function useProductActions() {
   const { addNotification } = useNotification();
-  const { products, isLoading, error } = useProducts(); 
+  const { products, isLoading, error } = useProducts();
+  const { categories } = useCategories(); 
   const [recentlyviewed, setRecentlyviewed] = useLocalStorage("recentlyViewed", []); 
   const [selectedCategory, setSelectedCategory] = useState("All"); 
-  
-  const categories = ["All", "electronics", "jewelery", "men's clothing", "women's clothing"];
 
   const handleProductClick = (product) => {
     const filtered = recentlyviewed.filter(item => item.id !== product.id);
