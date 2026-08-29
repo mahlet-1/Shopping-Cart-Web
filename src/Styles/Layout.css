@@ -60,11 +60,18 @@
   color: #483307;
 }
 
-.nav-cart .cart-link {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Controls the space between Wishlist and Cart */
+}
+
+.cart-link,
+.wishlist-link {
   text-decoration: none;
   color: #ffffff;
   background-color: #483307;
-  padding: 15px 20px;
+  padding: 12px 18px;
   border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -74,7 +81,8 @@
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.nav-cart .cart-link:hover {
+.cart-link:hover,
+.wishlist-link:hover {
   background-color: #7b6011;
   transform: translateY(-1px);
 }
