@@ -53,6 +53,10 @@ export function Shop() {
   if (isLoading) {
     return (
       <div className="shop-container">
+        <div className="spinner-container">
+          <div className="spinner" />
+          <p>Loading products...</p>
+        </div>
         <div className="product-grid">
           {Array.from({ length: 8 }).map((_, index) => (
             <SkeletonCard key={index} />

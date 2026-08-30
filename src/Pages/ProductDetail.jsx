@@ -46,7 +46,12 @@ export function ProductDetail() {
 };
 
   if (loading) {
-    return <div className="product-loading">Loading product details...</div>;
+   return (
+      <div className="spinner-container">
+        <div className="spinner" />
+        <p>Loading product details...</p>
+      </div>
+    );
   }
 
   if (!product) {

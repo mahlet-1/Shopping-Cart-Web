@@ -21,7 +21,7 @@ export function Home() {
 
   return (
     <div className="home-container">
-      <section className="hero-banner">
+      <section className="hero-banner hero-animate-pop-up">
         <h1>Discover what you need.</h1>
         <p>Explore materials you need to elevate your space, style, and routine.</p>
         <Link 
@@ -33,7 +33,10 @@ export function Home() {
       </section>
 
       {isLoading ? (
-        <div className="loading-state">Loading items...</div>
+        <div className="spinner-container">
+          <div className="spinner" />
+          <p>Loading items...</p>
+        </div>
       ) : error ? (
         <div className="error-state">Failed to load products.</div>
       ) : (
